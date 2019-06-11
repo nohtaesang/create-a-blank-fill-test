@@ -1,7 +1,28 @@
 import React, { FunctionComponent, useState } from 'react';
+import { connect } from 'react-redux';
+import { getSubjectList } from '../redux/actions/subject';
+import { SubjectListState, SubjectListParams, GetSubjectList } from '../redux/types/subject';
+
+interface Props {
+	subjectList: SubjectListParams;
+	getSubjectList: GetSubjectList;
+}
 
 const Content: FunctionComponent = () => {
-	return <div>hi</div>;
+	return (
+		<div>
+			<button onClick={() => {}}>hi</button>
+		</div>
+	);
 };
 
-export default Content;
+const mapStateToProps = (state: SubjectListState) => {
+	const { subjectList } = state;
+	return subjectList;
+};
+const mapDispatchToProps = { getSubjectList };
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Content);

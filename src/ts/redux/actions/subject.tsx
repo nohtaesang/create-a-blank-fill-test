@@ -1,4 +1,4 @@
-function getSubjectList(ownerId: number) {
+export function getSubjectList(ownerId: number) {
 	return {
 		type: 'GET_SUBJECTS_LIST',
 		payload: ownerId

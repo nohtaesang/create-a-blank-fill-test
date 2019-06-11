@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-
+import Content from './ts/layouts/content';
 const App: FunctionComponent = () => {
-	return <div>hi</div>;
+	return <Content></Content>;
 };
 
 export default App;

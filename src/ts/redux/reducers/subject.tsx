@@ -11,7 +11,9 @@ function subjectReducer(state = initState, action: SubjectActionTypes): SubjectL
 		case 'GET_SUBJECT_LIST':
 			return state;
 		case 'GET_SUBJECTS_LIST_SUCCESS':
-			return { ...state, subjectList: action.payload };
+			console.log(action.payload)
+			return state
+			// return { ...state, subjectList: action.payload };
 		default:
 			return state;
 	}
