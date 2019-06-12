@@ -17,7 +17,7 @@ const Content: FunctionComponent<ContentProps> = (props) => {
 
 	return (
 		<div>
-			<button onClick={onClickGetSubjectList}>hi</button>
+			<button onClick={onClickGetSubjectList}>bye</button>
 		</div>
 	);
 };
