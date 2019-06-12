@@ -1,7 +1,8 @@
 import { all } from 'redux-saga/effects';
-import { watchGetSubjectList } from '../sagas/subject';
+import { watchFetchSubjectList } from './subject';
+
 function* rootSaga() {
-	yield all([ watchGetSubjectList ]);
+	yield all([ watchFetchSubjectList ]);
 }
 
 export default rootSaga;
