@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import * as React from 'react';
+import { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
 import { getSubjectList } from '../redux/models/subject';
 import { State } from '../redux/reducers';

@@ -1,5 +1,5 @@
 import App, { Container } from 'next/app';
-import React from 'react';
+import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from '../src/ts/redux/store';
 
