@@ -1,5 +1,9 @@
-import { SubjectState } from '../models/subject';
-import { subjectActionTypes as at, SubjectActionsTypes, GetSubjectListSuccessType } from '../actions/subject';
+import {
+	subjectActionTypes as at,
+	SubjectState,
+	SubjectActionsTypes,
+	GetSubjectListSuccessType
+} from '../models/subject';
 
 const initialState: SubjectState = {
 	subjectList: []

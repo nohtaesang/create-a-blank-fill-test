@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { subjectActionTypes as at, GetSubjectListType, getSubjectListSuccess } from '../actions/subject';
+import { subjectActionTypes as at, GetSubjectListType, getSubjectListSuccess } from '../models/subject';
 
 export function* watchGetSubjectList() {
 	yield takeLatest(at.GET_SUBJECT_LIST, getSubjectList);
