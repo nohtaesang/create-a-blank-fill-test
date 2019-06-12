@@ -2,3 +2,4 @@
 * graphQL
 * reselector
 * immutable
+* next.js
