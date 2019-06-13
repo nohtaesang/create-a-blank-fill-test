@@ -1,0 +1,87 @@
+import { SubjectType } from '../models/subject';
+
+export const subjectActionConstant = {
+	GET_SUBJECT_LIST: 'GET_SUBJECT_LIST',
+	GET_SUBJECT_LIST_SUCCESS: 'GET_SUBJECT_LIST_SUCCESS',
+	GET_SUBJECT: 'GET_SUBJECT',
+	GET_SUBJECT_SUCCESS: 'GET_SUBJECT_SUCCESS',
+	POST_SUBJECT: 'POST_SUBJECT',
+	POST_SUBJECT_SUCCESS: 'POST_SUBJECT_SUCCESS',
+	PUT_SUBJECT: 'PUT_SUBJECT',
+	PUT_SUBJECT_SUCCESS: 'PUT_SUBJECT_SUCCESS',
+	DELETE_SUBJECT: 'DELETE_SUBJECT',
+	DELETE_SUBJECT_SUCCESS: 'DELETE_SUBJECT_SUCCESS'
+};
+
+export const getSubjectList = (subjectIdList: number[]) => ({
+	type: subjectActionConstant.GET_SUBJECT_LIST,
+	payload: subjectIdList
+});
+
+export const getSubjectListSuccess = (subjectList: SubjectType[]) => ({
+	type: subjectActionConstant.GET_SUBJECT_LIST_SUCCESS,
+	payload: subjectList
+});
+
+export const getSubject = (id: number) => ({
+	type: subjectActionConstant.GET_SUBJECT,
+	payload: id
+});
+
+export const getSubjectSuccess = (subject: SubjectType) => ({
+	type: subjectActionConstant.GET_SUBJECT_SUCCESS,
+	payload: subject
+});
+
+export const postSubject = (name: string, questionList: number[]) => ({
+	type: subjectActionConstant.POST_SUBJECT,
+	payload: { name, questionList }
+});
+
+export const postSubjectSuccess = (id: number) => ({
+	type: subjectActionConstant.POST_SUBJECT_SUCCESS,
+	payload: id
+});
+
+export const putSubject = (id: number, name: string, questionList: number[]) => ({
+	type: subjectActionConstant.PUT_SUBJECT,
+	payload: { id, name, questionList }
+});
+
+export const putSubjectSuccess = (id: number) => ({
+	type: subjectActionConstant.PUT_SUBJECT_SUCCESS,
+	payload: id
+});
+
+export const deleteSubject = (id: number) => ({
+	type: subjectActionConstant.DELETE_SUBJECT,
+	payload: id
+});
+
+export const deleteSubjectSuccess = (id: number) => ({
+	type: subjectActionConstant.DELETE_SUBJECT_SUCCESS,
+	payload: id
+});
+
+export type GetSubjectListType = ReturnType<typeof getSubjectList>;
+export type GetSubjectListTypeSuccess = ReturnType<typeof getSubjectListSuccess>;
+export type GetSubjectType = ReturnType<typeof getSubject>;
+export type GetSubjectTypeSuccess = ReturnType<typeof getSubjectSuccess>;
+export type PostSubjectType = ReturnType<typeof postSubject>;
+export type PostSubjectTypeSuccess = ReturnType<typeof postSubjectSuccess>;
+export type PutSubjectType = ReturnType<typeof putSubject>;
+export type PutSubjectTypeSuccess = ReturnType<typeof putSubjectSuccess>;
+export type DeleteSubjectType = ReturnType<typeof deleteSubject>;
+export type DeleteSubjectTypeSuccess = ReturnType<typeof deleteSubjectSuccess>;
+
+export type SubjectActionType =
+	| GetSubjectListType
+	| GetSubjectListTypeSuccess
+	| GetSubjectType
+	| GetSubjectTypeSuccess
+	| PostSubjectType
+	| PostSubjectTypeSuccess
+	| PutSubjectType
+	| PutSubjectTypeSuccess
+	| DeleteSubjectType
+	| DeleteSubjectTypeSuccess;

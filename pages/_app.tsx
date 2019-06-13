@@ -2,6 +2,7 @@ import App, { Container } from 'next/app';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from '../src/ts/redux/store';
+import Layout from '../src/ts/layout';
 
 export default class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {
@@ -19,7 +20,9 @@ export default class MyApp extends App {
 		return (
 			<Container>
 				<Provider store={store}>
-					<Component {...pageProps} />
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
 				</Provider>
 			</Container>
 		);
