@@ -1,4 +1,9 @@
-import { subjectActionConstant as sac, SubjectActionType, GetSubjectListTypeSuccess } from '../actions/subject';
+import {
+	subjectActionConstant as sac,
+	SubjectActionType,
+	GetSubjectListSuccessType,
+	SetSubjectListType
+} from '../actions/subject';
 
 import { SubjectStateType } from '../models/subject';
 
@@ -12,7 +17,9 @@ export default (state = initialState, action: SubjectActionType): SubjectStateTy
 		case sac.GET_SUBJECT_LIST:
 			return state;
 		case sac.GET_SUBJECT_LIST_SUCCESS:
-			return { ...state, subjectList: (action as GetSubjectListTypeSuccess).payload };
+			return { ...state, subjectList: (action as GetSubjectListSuccessType).payload };
+		case sac.SET_SUBJECT_LIST:
+			return { ...state, subjectList: (action as SetSubjectListType).payload };
 		// 쓸 일이 있을까?
 		// case sac.GET_SUBJECT:
 		// 	return state;

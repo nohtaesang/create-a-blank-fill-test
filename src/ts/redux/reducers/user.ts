@@ -16,7 +16,7 @@ export default (state = initialState, action: UserActionType): UserStateType => 
 		case uac.LOGOUT:
 			return state;
 		case uac.LOGOUT_SUCCESS:
-			return state;
+			return { ...state, user: null };
 		default:
 			return state;
 	}

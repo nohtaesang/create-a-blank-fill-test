@@ -3,6 +3,7 @@ import { SubjectType } from '../models/subject';
 export const subjectActionConstant = {
 	GET_SUBJECT_LIST: 'GET_SUBJECT_LIST',
 	GET_SUBJECT_LIST_SUCCESS: 'GET_SUBJECT_LIST_SUCCESS',
+	SET_SUBJECT_LIST: 'SET_SUBJECT_LIST',
 	GET_SUBJECT: 'GET_SUBJECT',
 	GET_SUBJECT_SUCCESS: 'GET_SUBJECT_SUCCESS',
 	POST_SUBJECT: 'POST_SUBJECT',
@@ -20,6 +21,11 @@ export const getSubjectList = (subjectIdList: number[]) => ({
 
 export const getSubjectListSuccess = (subjectList: SubjectType[]) => ({
 	type: subjectActionConstant.GET_SUBJECT_LIST_SUCCESS,
+	payload: subjectList
+});
+
+export const setSubjectList = (subjectList: SubjectType[]) => ({
+	type: subjectActionConstant.SET_SUBJECT_LIST,
 	payload: subjectList
 });
 
@@ -64,24 +70,26 @@ export const deleteSubjectSuccess = (id: number) => ({
 });
 
 export type GetSubjectListType = ReturnType<typeof getSubjectList>;
-export type GetSubjectListTypeSuccess = ReturnType<typeof getSubjectListSuccess>;
+export type GetSubjectListSuccessType = ReturnType<typeof getSubjectListSuccess>;
+export type SetSubjectListType = ReturnType<typeof setSubjectList>;
 export type GetSubjectType = ReturnType<typeof getSubject>;
-export type GetSubjectTypeSuccess = ReturnType<typeof getSubjectSuccess>;
+export type GetSubjectSuccessType = ReturnType<typeof getSubjectSuccess>;
 export type PostSubjectType = ReturnType<typeof postSubject>;
-export type PostSubjectTypeSuccess = ReturnType<typeof postSubjectSuccess>;
+export type PostSubjectSuccessType = ReturnType<typeof postSubjectSuccess>;
 export type PutSubjectType = ReturnType<typeof putSubject>;
-export type PutSubjectTypeSuccess = ReturnType<typeof putSubjectSuccess>;
+export type PutSubjectSuccessType = ReturnType<typeof putSubjectSuccess>;
 export type DeleteSubjectType = ReturnType<typeof deleteSubject>;
-export type DeleteSubjectTypeSuccess = ReturnType<typeof deleteSubjectSuccess>;
+export type DeleteSubjectSuccessType = ReturnType<typeof deleteSubjectSuccess>;
 
 export type SubjectActionType =
 	| GetSubjectListType
-	| GetSubjectListTypeSuccess
+	| GetSubjectListSuccessType
+	| SetSubjectListType
 	| GetSubjectType
-	| GetSubjectTypeSuccess
+	| GetSubjectSuccessType
 	| PostSubjectType
-	| PostSubjectTypeSuccess
+	| PostSubjectSuccessType
 	| PutSubjectType
-	| PutSubjectTypeSuccess
+	| PutSubjectSuccessType
 	| DeleteSubjectType
-	| DeleteSubjectTypeSuccess;
+	| DeleteSubjectSuccessType;

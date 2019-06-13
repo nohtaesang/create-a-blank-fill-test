@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState, useEffect } from 'react';
 // components
 import LoginForm from './loginForm';
 // models
@@ -20,6 +20,14 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 	const { user } = props;
 	const { login, logout } = props;
 	const [ isActiveLoginForm, setIsActiveLoginForm ] = useState(false);
+
+	useEffect(
+		() => {
+			if (user === null) return;
+			setIsActiveLoginForm(false);
+		},
+		[ user ]
+	);
 
 	const onClickLoginToggle = () => {
 		setIsActiveLoginForm(!isActiveLoginForm);
@@ -42,7 +50,7 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 					</div>
 				)}
 			</div>
-			{isActiveLoginForm && user === null && <LoginForm login={login} />}
+			{isActiveLoginForm && <LoginForm login={login} />}
 		</Wrap>
 	);
 };

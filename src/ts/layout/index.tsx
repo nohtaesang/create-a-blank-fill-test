@@ -7,8 +7,8 @@ import { State } from '../redux/reducers';
 import Header from './header';
 import SubjectTab from './subjectTab';
 // actions
-import { login, logout, LoginType } from '../redux/actions/user';
-import { getSubjectList } from '../redux/actions/subject';
+import { login, logout } from '../redux/actions/user';
+import { getSubjectList, setSubjectList } from '../redux/actions/subject';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
@@ -18,14 +18,18 @@ type LayoutProps = StateProps & DispatchProps & OwnProps;
 
 const Layout: FunctionComponent<LayoutProps> = (props) => {
 	const { user, subjectList } = props;
-	const { getSubjectList, login, logout } = props;
+	const { login, logout, getSubjectList, setSubjectList } = props;
 
 	useEffect(
 		() => {
-			if (!user || !getSubjectList) return;
-			getSubjectList([ 0, 1 ]);
+			if (user === null) {
+				setSubjectList([]);
+			} else {
+				const { subjectIdList } = user;
+				getSubjectList(subjectIdList);
+			}
 		},
-		[ user, getSubjectList ]
+		[ user ]
 	);
 
 	return (
@@ -44,9 +48,10 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-	getSubjectList: bindActionCreators(getSubjectList, dispatch),
 	login: bindActionCreators(login, dispatch),
-	logout: bindActionCreators(logout, dispatch)
+	logout: bindActionCreators(logout, dispatch),
+	getSubjectList: bindActionCreators(getSubjectList, dispatch),
+	setSubjectList: bindActionCreators(setSubjectList, dispatch)
 });
 
 export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Layout);
