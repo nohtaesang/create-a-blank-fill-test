@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { FunctionComponent, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { State } from '../redux/reducers';
 // actions
-import { LoginType } from '../redux/actions/user';
+import { userActionConstant } from '../redux/actions/user';
+import { subjectActionConstant } from '../redux/actions/subject';
+// actions
 
-type OwnProps = {
-	login(email: string, password: string): LoginType;
-};
+type OwnProps = {};
 
-type SubjectTabProps = OwnProps;
+const Header: FunctionComponent<OwnProps> = (props) => {
+	// action
+	const dispatch = useDispatch();
 
-const Header: FunctionComponent<SubjectTabProps> = (props) => {
-	const { login } = props;
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
@@ -21,7 +23,7 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 		setPassword(e.target.value);
 	};
 	const onClickLogin = () => {
-		login(email, password);
+		dispatch({ type: userActionConstant.LOGIN, payload: { email, password } });
 	};
 	return (
 		<div>

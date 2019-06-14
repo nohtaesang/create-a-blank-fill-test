@@ -1,15 +1,24 @@
 {
-    "compilerOptions": {
-      "module": "esnext",
-      "target": "esnext",
-      "jsx": "react",
-      "allowJs": true,
-      "sourceMap": false,
-      "moduleResolution": "node",
-      "lib": ["es6", "dom"]
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@actions/*":["./src/ts/redux/actions/*"],
+      "@models/*":["./src/ts/redux/models/*"],
+      "@reducers/*":["./src/ts/redux/reducers/*"],
+      "@components/*":["./src/ts/components/*"],
+      "@layout/*":["./src/ts/layout/*"],
+      "@styles/*":["./src/styles/*"]
     },
-    "exclude": [
-      "out",
-      ".next"
-    ]
-  }
+    "module": "esnext",
+    "target": "esnext",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "lib": ["es6", "dom"]
+  },
+  "exclude": [
+    "out",
+    ".next"
+  ]
+}

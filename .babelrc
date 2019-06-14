@@ -3,7 +3,17 @@
 	  "next/babel" ,"@zeit/next-typescript/babel"
 	],
 	"plugins": [
-	 
+		["module-resolver", {
+			"root": ["./"],
+			"alias": {
+			  "@actions":"./src/ts/redux/actions/",
+			  "@models":"./src/ts/redux/models/",
+			  "@reducers":"./src/ts/redux/reducers/",
+			  "@components":"./src/ts/components/",
+			  "@layout":"./src/ts/layout/",
+			  "@styles":"./src/styles/"
+			},
+		  }]
 	],
 	"env" : {
 	  "production" : {

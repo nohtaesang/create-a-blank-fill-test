@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { FunctionComponent, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { State } from '../redux/reducers';
+// actions
+import { userActionConstant } from '../redux/actions/user';
 // components
 import LoginForm from './loginForm';
-// models
-import { UserType } from '../redux/models/user';
-// actions
-import { LoginType, LogoutType } from '../redux/actions/user';
 
-type OwnProps = {
-	user: UserType | null;
-	loginState: string;
-	login(email: string, password: string): LoginType;
-	logout(): LogoutType;
-};
+type OwnProps = {};
 
-type SubjectTabProps = OwnProps;
+const Header: FunctionComponent<OwnProps> = (props) => {
+	// store
+	const { userReducer } = useSelector((state: State) => state);
+	const { user, loginState } = userReducer;
+	// action
+	const dispatch = useDispatch();
 
-const Header: FunctionComponent<SubjectTabProps> = (props) => {
-	const { user, loginState } = props;
-	const { login, logout } = props;
 	const [ isActiveLoginForm, setIsActiveLoginForm ] = useState(false);
 
 	useEffect(
@@ -32,7 +29,7 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 		setIsActiveLoginForm(!isActiveLoginForm);
 	};
 	const onClickLogout = () => {
-		logout();
+		dispatch({ type: userActionConstant.LOGOUT });
 	};
 
 	return (
@@ -45,7 +42,7 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 					<div onClick={onClickLogout}>Logout</div>
 				)}
 			</div>
-			{isActiveLoginForm && <LoginForm login={login} />}
+			{isActiveLoginForm && <LoginForm />}
 		</div>
 	);
 };

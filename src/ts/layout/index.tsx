@@ -1,25 +1,25 @@
 import * as React from 'react';
 import { FunctionComponent, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../redux/reducers';
+// actions
+import { userActionConstant } from '../redux/actions/user';
+import { subjectActionConstant } from '../redux/actions/subject';
 // components
 import Header from './header';
 import SubjectTab from './subjectTab';
 
-// actions
-import { login, logout, setUser } from '../redux/actions/user';
-import { getSubjectList, setSubjectList } from '../redux/actions/subject';
-
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 type OwnProps = {};
 
-type LayoutProps = StateProps & DispatchProps & OwnProps;
+const Layout: FunctionComponent<OwnProps> = (props) => {
+	// props
+	const { children } = props;
+	// store
+	const { userReducer } = useSelector((state: State) => state);
+	const { user, loginState } = userReducer;
+	// action
+	const dispatch = useDispatch();
 
-const Layout: FunctionComponent<LayoutProps> = (props) => {
-	const { children, user, loginState, subjectList } = props;
-	const { login, logout, getSubjectList, setSubjectList, setUser } = props;
 	const [ loading, setLoading ] = useState(false);
 
 	useEffect(() => {
@@ -29,11 +29,11 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
 	const initializeUserInfo = async () => {
 		const nextUser = JSON.parse(localStorage.getItem('user'));
 		if (!nextUser) {
-			setSubjectList([]);
+			dispatch({ type: subjectActionConstant.SET_SUBJECT_LIST, payload: [] });
 		} else {
 			const { subjectIdList } = nextUser;
-			getSubjectList(subjectIdList);
-			setUser(nextUser);
+			dispatch({ type: subjectActionConstant.GET_SUBJECT_LIST, payload: subjectIdList });
+			dispatch({ type: userActionConstant.SET_USER, payload: nextUser });
 		}
 		setLoading(true);
 	};
@@ -43,10 +43,10 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
 			switch (loginState) {
 				case 'login':
 					const { subjectIdList } = user;
-					getSubjectList(subjectIdList);
+					dispatch({ type: subjectActionConstant.GET_SUBJECT_LIST, payload: subjectIdList });
 					return;
 				case 'logout':
-					setSubjectList([]);
+					dispatch({ type: subjectActionConstant.SET_SUBJECT_LIST, payload: [] });
 					return;
 			}
 		},
@@ -55,8 +55,8 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
 
 	return loading ? (
 		<div className="layout">
-			<Header user={user} login={login} logout={logout} loginState={loginState} />
-			{user ? <SubjectTab subjectList={subjectList} /> : <div>로그인을 해주세욤</div>}
+			<Header />
+			{user ? <SubjectTab /> : <div>로그인을 해주세욤</div>}
 			{children}
 		</div>
 	) : (
@@ -64,19 +64,4 @@ const Layout: FunctionComponent<LayoutProps> = (props) => {
 	);
 };
 
-const mapStateToProps = (state: State) => {
-	const { userReducer, subjectReducer } = state;
-	const { user, loginState } = userReducer;
-	const { subjectList } = subjectReducer;
-	return { user, loginState, subjectList };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-	login: bindActionCreators(login, dispatch),
-	logout: bindActionCreators(logout, dispatch),
-	setUser: bindActionCreators(setUser, dispatch),
-	getSubjectList: bindActionCreators(getSubjectList, dispatch),
-	setSubjectList: bindActionCreators(setSubjectList, dispatch)
-});
-
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Layout);
+export default Layout;

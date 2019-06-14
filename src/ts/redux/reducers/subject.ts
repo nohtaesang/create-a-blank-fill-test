@@ -38,7 +38,7 @@ export default (state = initialState, action: SubjectActionType): SubjectStateTy
 			return state;
 		case sac.DELETE_SUBJECT_SUCCESS:
 			return { ...state }; // 이미 프론트에서 삭제가 된 상태
-		case sac.SET_SELECTED_SUBEJCT:
+		case sac.SET_SELECTED_SUBJECT:
 			return { ...state, selectedSubject: (action as SetSelectedSubjectType).payload };
 		default:
 			return state;

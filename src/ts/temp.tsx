@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FunctionComponent, useState, useEffect } from 'react';
+import Router from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '@reducers/index';
 // actions
@@ -10,7 +11,7 @@ import { questionActionConstant } from '@actions/question';
 
 type OwnProps = {};
 
-const Question: FunctionComponent<OwnProps> = (props) => {
+const Temp: FunctionComponent<OwnProps> = (props) => {
 	// store
 	const { userReducer, subjectReducer, questionReducer } = useSelector((state: State) => state);
 	// action
@@ -19,4 +20,4 @@ const Question: FunctionComponent<OwnProps> = (props) => {
 	return <div>hi</div>;
 };
 
-export default Question;
+export default Temp;
