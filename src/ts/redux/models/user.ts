@@ -7,4 +7,5 @@ export type UserType = {
 
 export type UserStateType = {
 	user: UserType | null;
+	loginState: string;
 };

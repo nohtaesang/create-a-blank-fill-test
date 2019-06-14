@@ -3,6 +3,8 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from '../src/ts/redux/store';
 import Layout from '../src/ts/layout';
+// styles
+import '../src/styles/layout.scss';
 
 export default class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {

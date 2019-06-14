@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FunctionComponent, useState } from 'react';
-import { Subject } from '../redux/models/subject';
 
 type OwnProps = {
 	subjectList: Subject[];
@@ -14,7 +13,7 @@ const SubjectTab: FunctionComponent<SubjectTabProps> = (props) => {
 	const onClickSubject = (id: number) => {};
 
 	return (
-		<div>
+		<div className="subject-tab">
 			{subjectList.map((subject) => {
 				const { id, name, questionList } = subject;
 				return (

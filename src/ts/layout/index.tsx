@@ -6,8 +6,9 @@ import { State } from '../redux/reducers';
 // components
 import Header from './header';
 import SubjectTab from './subjectTab';
+
 // actions
-import { login, logout } from '../redux/actions/user';
+import { login, logout, setUser } from '../redux/actions/user';
 import { getSubjectList, setSubjectList } from '../redux/actions/subject';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -17,39 +18,63 @@ type OwnProps = {};
 type LayoutProps = StateProps & DispatchProps & OwnProps;
 
 const Layout: FunctionComponent<LayoutProps> = (props) => {
-	const { user, subjectList } = props;
-	const { login, logout, getSubjectList, setSubjectList } = props;
+	const { children, user, loginState, subjectList } = props;
+	const { login, logout, getSubjectList, setSubjectList, setUser } = props;
+	const [ loading, setLoading ] = useState(false);
+
+	useEffect(() => {
+		initializeUserInfo();
+	}, []);
+
+	const initializeUserInfo = async () => {
+		const nextUser = JSON.parse(localStorage.getItem('user'));
+		if (!nextUser) {
+			setSubjectList([]);
+		} else {
+			const { subjectIdList } = nextUser;
+			getSubjectList(subjectIdList);
+			setUser(nextUser);
+		}
+		setLoading(true);
+	};
 
 	useEffect(
 		() => {
-			if (user === null) {
-				setSubjectList([]);
-			} else {
-				const { subjectIdList } = user;
-				getSubjectList(subjectIdList);
+			switch (loginState) {
+				case 'login':
+					const { subjectIdList } = user;
+					getSubjectList(subjectIdList);
+					return;
+				case 'logout':
+					setSubjectList([]);
+					return;
 			}
 		},
-		[ user ]
+		[ loginState ]
 	);
 
-	return (
+	return loading ? (
 		<div className="layout">
-			<Header user={user} login={login} logout={logout} />
-			<SubjectTab subjectList={subjectList} />
+			<Header user={user} login={login} logout={logout} loginState={loginState} />
+			{user ? <SubjectTab subjectList={subjectList} /> : <div>로그인을 해주세욤</div>}
+			{children}
 		</div>
+	) : (
+		<div>hii</div>
 	);
 };
 
 const mapStateToProps = (state: State) => {
 	const { userReducer, subjectReducer } = state;
-	const { user } = userReducer;
+	const { user, loginState } = userReducer;
 	const { subjectList } = subjectReducer;
-	return { user, subjectList };
+	return { user, loginState, subjectList };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
 	login: bindActionCreators(login, dispatch),
 	logout: bindActionCreators(logout, dispatch),
+	setUser: bindActionCreators(setUser, dispatch),
 	getSubjectList: bindActionCreators(getSubjectList, dispatch),
 	setSubjectList: bindActionCreators(setSubjectList, dispatch)
 });

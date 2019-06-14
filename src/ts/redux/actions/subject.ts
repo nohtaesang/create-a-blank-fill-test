@@ -11,7 +11,8 @@ export const subjectActionConstant = {
 	PUT_SUBJECT: 'PUT_SUBJECT',
 	PUT_SUBJECT_SUCCESS: 'PUT_SUBJECT_SUCCESS',
 	DELETE_SUBJECT: 'DELETE_SUBJECT',
-	DELETE_SUBJECT_SUCCESS: 'DELETE_SUBJECT_SUCCESS'
+	DELETE_SUBJECT_SUCCESS: 'DELETE_SUBJECT_SUCCESS',
+	SET_SELECTED_SUBJECT: 'SET_SELECTED_SUBJECT'
 };
 
 export const getSubjectList = (subjectIdList: number[]) => ({
@@ -69,6 +70,11 @@ export const deleteSubjectSuccess = (id: number) => ({
 	payload: id
 });
 
+export const setSelectedSubject = (subject: SubjectType) => ({
+	type: subjectActionConstant.SET_SELECTED_SUBJECT,
+	payload: subject
+});
+
 export type GetSubjectListType = ReturnType<typeof getSubjectList>;
 export type GetSubjectListSuccessType = ReturnType<typeof getSubjectListSuccess>;
 export type SetSubjectListType = ReturnType<typeof setSubjectList>;
@@ -80,6 +86,7 @@ export type PutSubjectType = ReturnType<typeof putSubject>;
 export type PutSubjectSuccessType = ReturnType<typeof putSubjectSuccess>;
 export type DeleteSubjectType = ReturnType<typeof deleteSubject>;
 export type DeleteSubjectSuccessType = ReturnType<typeof deleteSubjectSuccess>;
+export type SetSelectedSubjectType = ReturnType<typeof setSelectedSubject>;
 
 export type SubjectActionType =
 	| GetSubjectListType
@@ -92,4 +99,5 @@ export type SubjectActionType =
 	| PutSubjectType
 	| PutSubjectSuccessType
 	| DeleteSubjectType
-	| DeleteSubjectSuccessType;
+	| DeleteSubjectSuccessType
+	| SetSelectedSubjectType;

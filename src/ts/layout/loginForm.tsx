@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { FunctionComponent, useState } from 'react';
 // actions
 import { LoginType } from '../redux/actions/user';
@@ -25,21 +24,12 @@ const Header: FunctionComponent<SubjectTabProps> = (props) => {
 		login(email, password);
 	};
 	return (
-		<Wrap>
+		<div>
 			<input onChange={onChangeEmail} value={email} />
 			<input onChange={onChangePassword} value={password} />
 			<button onClick={onClickLogin}>Login</button>
-		</Wrap>
+		</div>
 	);
 };
 
 export default Header;
-
-const Wrap = styled.div`
-	position: absolute;
-	top: 50px;
-	right: 0px;
-	border: solid 1px black;
-	width: 200px;
-	height: 200px;
-`;
